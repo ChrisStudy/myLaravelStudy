@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     //
-    public funtion project()
+    protected $guarded = [];
+    
+    public function project()
     {
     	return $this->belongsTo(Project::class);
     }

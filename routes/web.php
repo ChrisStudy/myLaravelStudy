@@ -22,6 +22,9 @@ Route::get('/contact','PagesController@contact');
 
 Route::resource('projects','ProjectsController');
 
+Route:: patch('/tasks/{task}','ProjectTasksController@update');
+Route:: post('/projects/{project}/tasks','ProjectTasksController@store');
+
 // Route::get('/projects','ProjectsController@index');
 
 // Route::get('/projects/{project}','ProjectsController@show');
