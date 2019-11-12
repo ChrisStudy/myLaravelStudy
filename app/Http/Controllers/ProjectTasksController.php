@@ -21,14 +21,14 @@ class ProjectTasksController extends Controller
     	return back();
 
     }
-    public function update(Task $task)
-    {
-        // $task->complete();
-        // $task->complete(request()->has('completed'));
-    	// $task->update([
-    	// 	'completed' => request()->has('completed')
-    	// ]);
-        request()->has('completed') ? $task->complete() : $task->incomplete();
-    	return back();
-    }
+    // public function update(Task $task)
+    // {
+    //     // $task->complete();
+    //     // $task->complete(request()->has('completed'));
+    // 	// $task->update([
+    // 	// 	'completed' => request()->has('completed')
+    // 	// ]);
+    //     request()->has('completed') ? $task->complete() : $task->incomplete();
+    // 	return back();
+    // }
 }
