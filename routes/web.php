@@ -1,5 +1,7 @@
 <?php
 
+//use Illuminate\Filesystem\Filesystem;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,9 +12,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+        //E21 code
+// app()->singleton('twitter',function(){
+// 	return new \App\Services\Twitter('askjdhskajhdas');
+// });
 
 
-
+// Route::get('/', function() {
+// 	 dd(app(Filesystem::class));
+// 	});
+// EOE E21
 
 Route::get('/','PagesController@home');
 

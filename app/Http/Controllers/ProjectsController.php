@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Project;
 use App\Mail\ProjectCreated;
+use App\Services\Twitter;
 
 class ProjectsController extends Controller
 {
@@ -81,6 +82,11 @@ class ProjectsController extends Controller
     {
         //
         // $project = project::findorFail($id);
+        //E21 code
+        // $twitter = app('twitter');
+        // dd($twitter);
+        //EOE E21
+
         return view('projects.show',compact('project'));
     }
 
