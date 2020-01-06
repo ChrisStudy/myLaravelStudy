@@ -22,7 +22,23 @@
 // 	 dd(app(Filesystem::class));
 // 	});
 // EOE E21
+// use App\Services\Twitter;
 
+// Route::get('/',function(Twitter $twitter){
+// 	dd($twitter);
+// 	return view('welcome');
+// });
+// EOE E22
+
+//use App\Services\Twitter;
+
+// use App\Repositories\UserRepository;
+
+// Route::get('/',function(UserRepository $users){
+// 	dd($users);
+// 	return view('welcome');
+// });
+// EOE E22
 Route::get('/','PagesController@home');
 
 Route::get('/about','PagesController@about');
