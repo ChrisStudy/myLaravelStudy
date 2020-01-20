@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 @section('title','Projects')
 @section('content')
 <h1> Create a New Project</h1>

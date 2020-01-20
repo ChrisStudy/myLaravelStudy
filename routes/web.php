@@ -39,7 +39,7 @@
 // 	return view('welcome');
 // });
 // EOE E22
-Route::get('/','PagesController@home');
+Route::get('/home','PagesController@home');
 
 Route::get('/about','PagesController@about');
 
@@ -66,3 +66,6 @@ Route::delete('/completed-tasks/{task}','CompletedTasksController@destory');
 // Route::patch('/projects/{project}','ProjectsController@update');
 
 // Route::delete('/projects/{project}','ProjectsController@destory');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
