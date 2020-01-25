@@ -2,6 +2,7 @@
 
 @section ('content')
 
+
 <h1 class="title">Edit Project</h1>
 
 

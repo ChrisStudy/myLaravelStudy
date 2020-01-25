@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title','Projects')
 @section('content')
+{{auth()->id()}}
 <h1> Create a New Project</h1>
 
 <form method="POST" action="/projects">

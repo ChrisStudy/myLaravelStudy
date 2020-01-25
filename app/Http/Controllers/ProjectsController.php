@@ -14,10 +14,22 @@ class ProjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+  
+    $this->middleware('auth');
+  
+  //or
+  
+    //$this->middleware('auth')->only(['store','update']);
+  
+    }
+
     public function index()
     {
-            $projects = project::all();
-
+            //$projects = project::all();
+            $projects = Project::where('owner_id',auth()->id())->get();
         //return $projects;
            // dump($projects);
             // cache()->rememberForever('stats',function(){
@@ -49,19 +61,20 @@ class ProjectsController extends Controller
         $attributes = request()->validate([
             'title' => ['required', 'min:3'],
             'description' => ['required', 'min:3']
+            
         ]);
  
-        Project::create($attributes);
+        //Project::create($attributes + ['owner_id'=>auth()->id()]);
 
 
         // $attributes = request()->validate([
         //     'title' => ['required', 'min:3'],
         //     'description' => ['required', 'min:3']
         // ]);
-
-        // $attributes['ower_id'] = auth()->id();
+        $owner_id = auth()->id();
+        $attributes['owner_id'] = $owner_id;
         
-        // Project::create($attributes);
+        Project::create($attributes);
 
 
         //$project->save();
