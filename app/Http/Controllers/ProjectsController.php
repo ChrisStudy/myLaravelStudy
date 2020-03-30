@@ -99,6 +99,10 @@ class ProjectsController extends Controller
         // $twitter = app('twitter');
         // dd($twitter);
         //EOE E21
+        //abort_if($project->owner_id !== auth()->id(),403);
+
+        $this->authorize('update',$project);
+        
 
         return view('projects.show',compact('project'));
     }
@@ -127,6 +131,9 @@ class ProjectsController extends Controller
      */
     public function update(Project $project)
     {
+
+        $this->authorize('update',$project);
+
         $project->update(request(['title','description']));
 
         // $project =Project::findorFail($id);
@@ -148,6 +155,8 @@ class ProjectsController extends Controller
      */
     public function destroy(Project $project)
     {
+
+        $this->authorize('update',$project);
 
        $project->delete();
 

@@ -39,8 +39,8 @@
 // 	return view('welcome');
 // });
 // EOE E22
-Route::get('/home','PagesController@home');
-
+//Route::get('/home','PagesController@home');
+Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/about','PagesController@about');
 
 Route::get('/contact','PagesController@contact');
