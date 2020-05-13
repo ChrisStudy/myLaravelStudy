@@ -3,7 +3,7 @@
 
 {{ $project->description}}
 
-@component('mail::button', ['url' => url('/project/'.$project->$id)])
+@component('mail::button', ['url' => url('/project/'.$project->id)])
 View Project
 @endcomponent
 

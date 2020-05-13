@@ -14,10 +14,8 @@
 
 	</div>
 
-	<div class="field">
-		
+	<div class="field">		
 		<textarea class="textarea {{ $errors->has('description') ? 'is-danger' : '' }}" name="description" placeholder="Project description">{{ old('description') }}</textarea>
-
 	</div>
 
 	<div class="field">

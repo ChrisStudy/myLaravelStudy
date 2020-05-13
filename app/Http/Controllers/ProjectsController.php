@@ -29,7 +29,8 @@ class ProjectsController extends Controller
     public function index()
     {
             //$projects = project::all();
-            $projects = Project::where('owner_id',auth()->id())->get();
+        $projects = auth()->user()->projects;
+           // $projects = Project::where('owner_id',auth()->id())->get();
         //return $projects;
            // dump($projects);
             // cache()->rememberForever('stats',function(){
@@ -58,11 +59,13 @@ class ProjectsController extends Controller
      */
     public function store()
     {
-        $attributes = request()->validate([
-            'title' => ['required', 'min:3'],
-            'description' => ['required', 'min:3']
+        // $attributes = request()->validate([
+        //     'title' => ['required', 'min:3'],
+        //     'description' => ['required', 'min:3']
             
-        ]);
+        // ]);
+
+        $attributes = $this->validateProject();
  
         //Project::create($attributes + ['owner_id'=>auth()->id()]);
 
@@ -74,13 +77,15 @@ class ProjectsController extends Controller
         $owner_id = auth()->id();
         $attributes['owner_id'] = $owner_id;
         
-        Project::create($attributes);
+        //Project::create($attributes);
+
+        $projectsaved = Project::create($attributes);
 
 
         //$project->save();
-        // \Mail::to('chris@adimpact.com.au')->send(
-        //     new ProjectCreated()
-        // );
+         \Mail::to('chris@adimpact.com.au')->send(
+             new ProjectCreated($projectsaved)
+         );
 
         return redirect('/projects');
     }
@@ -132,9 +137,6 @@ class ProjectsController extends Controller
     public function update(Project $project)
     {
 
-        $this->authorize('update',$project);
-
-        $project->update(request(['title','description']));
 
         // $project =Project::findorFail($id);
 
@@ -143,6 +145,18 @@ class ProjectsController extends Controller
         // $project->description = $request->description;
 
         // $project->save();
+
+        $project ->update($this->validateProject());
+
+        //         $this->authorize('update',$project);
+
+        //         $attributes = request()->validate([
+        //     'title' => ['required', 'min:3'],
+        //     'description' => ['required', 'min:3']
+            
+        // ]);
+
+        // $project->update(request(['title','description']));
 
         return redirect('/projects');
     }
@@ -162,4 +176,17 @@ class ProjectsController extends Controller
 
       return redirect('/projects');
   }
+
+  public function validateProject()
+{
+
+                return request()->validate([
+            'title' => ['required', 'min:3'],
+            'description' => ['required', 'min:3']
+            
+        ]);
+
+}
+
+
 }
