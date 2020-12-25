@@ -1,5 +1,7 @@
 <?php
 
+use App\Notifications\SubscriptionRenewalFailed;
+
 //use Illuminate\Filesystem\Filesystem;
 
 /*
@@ -40,6 +42,14 @@
 // });
 // EOE E22
 //Route::get('/home','PagesController@home');
+Route::get('/user-notification',function(){
+	$user = App\User::first();
+
+	$user -> notify(new SubscriptionRenewalFailed);
+	
+	return 'Done';
+
+});
 Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 Route::get('/about','PagesController@about');
 

@@ -1,5 +1,5 @@
 @component('mail::message')
-# New Project: {{ $project->title}}
+New Project: {{ $project->title}}
 
 {{ $project->description}}
 

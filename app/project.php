@@ -2,9 +2,9 @@
 
 namespace App;
 
+use App\Events\ProjectCreated;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\ProjectCreated;
 
 class project extends Model
 {
@@ -13,19 +13,9 @@ class project extends Model
     	'title' , 'description' ,'owner_id'
     ];
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::created(function ($project) {
-
-            Mail::to($project->owner->email)->send(
-            new ProjectCreated($project)
-         );
-
-
-        });
-    }
+    protected $dispatchesEvents = [
+        'created' => ProjectCreated::class
+    ];
 
     public function owner() 
     {
