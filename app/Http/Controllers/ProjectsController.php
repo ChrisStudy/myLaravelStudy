@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Project;
 use App\Mail\ProjectCreated;
 use App\Services\Twitter;
+use Mail;
 
 class ProjectsController extends Controller
 {
@@ -79,13 +80,13 @@ class ProjectsController extends Controller
         
         //Project::create($attributes);
 
-        $projectsaved = Project::create($attributes);
+        $projects = Project::create($attributes);
 
 
         //$project->save();
-         \Mail::to('chris@adimpact.com.au')->send(
-             new ProjectCreated($projectsaved)
-         );
+         // Mail::to($projects->owner->email)->send(
+         //    new ProjectCreated($projects)
+         // );
 
         return redirect('/projects');
     }

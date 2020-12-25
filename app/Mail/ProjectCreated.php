@@ -11,16 +11,14 @@ class ProjectCreated extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $project;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($project)
+    public function __construct()
     {
         //
-        $this->project = $project;
     }
 
     /**
@@ -30,6 +28,6 @@ class ProjectCreated extends Mailable
      */
     public function build()
     {
-        return $this->markdown('mail.project-created');
+        return $this->markdown('emails.project-created');
     }
 }
