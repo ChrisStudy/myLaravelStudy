@@ -1,6 +1,7 @@
 <?php
 
 use App\Notifications\SubscriptionRenewalFailed;
+use Illuminate\Http\Request;
 
 //use Illuminate\Filesystem\Filesystem;
 
@@ -42,6 +43,29 @@ use App\Notifications\SubscriptionRenewalFailed;
 // });
 // EOE E22
 //Route::get('/home','PagesController@home');
+Route::get('projects/create', function(){
+
+	return view('projects.create');
+
+});
+Route::post('projects', function(){
+
+	session()->flash('message','Your project has been created.');	
+
+	return redirect('/projects');
+
+});
+Route::get('/test-session',function(Request $request){
+
+	//session(['name'=>'JohnDoe']);
+	$request->session()->put('footbar','baz');
+
+	return $request->session()->get('footbar');
+	session()->flash('message','Your project has been created.');
+	return session('name','A default');
+
+});
+
 Route::get('/user-notification',function(){
 	$user = App\User::first();
 

@@ -8,7 +8,10 @@
 		{{ $project->title}}
 	</a>
 </li>
-
 @endforeach
+@if (session('message'))
 
+<p>{{ session('message') }}</p>
+
+@endif
 @endsection
