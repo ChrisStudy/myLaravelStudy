@@ -43,25 +43,25 @@ use Illuminate\Http\Request;
 // });
 // EOE E22
 //Route::get('/home','PagesController@home');
-Route::get('projects/create', function(){
+// Route::get('projects/create', function(){
 
-	return view('projects.create');
+// 	return view('projects.create');
 
-});
-Route::post('projects', function(){
+// });
+// Route::post('projects', function(){
 
-	session()->flash('message','Your project has been created.');	
+// 	session()->flash('message','Your project has been created.');	
 
-	return redirect('/projects');
+// 	return redirect('/projects');
 
-});
+// });
 Route::get('/test-session',function(Request $request){
 
 	//session(['name'=>'JohnDoe']);
 	$request->session()->put('footbar','baz');
 
 	return $request->session()->get('footbar');
-	session()->flash('message','Your project has been created.');
+	//session()->flash('message','Your project has been created.');
 	return session('name','A default');
 
 });
