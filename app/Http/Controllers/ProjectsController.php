@@ -7,6 +7,7 @@ use App\Project;
 use App\Services\Twitter;
 use Illuminate\Http\Request;
 use Mail;
+
 // use App\Event\ProjectCreated;
 
 class ProjectsController extends Controller
@@ -19,27 +20,25 @@ class ProjectsController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');
   
-    $this->middleware('auth');
-  
-  //or
+        //or
   
     //$this->middleware('auth')->only(['store','update']);
-  
     }
 
     public function index()
     {
-            //$projects = project::all();
+        //$projects = project::all();
         $projects = auth()->user()->projects;
-           // $projects = Project::where('owner_id',auth()->id())->get();
+        // $projects = Project::where('owner_id',auth()->id())->get();
         //return $projects;
-           // dump($projects);
-            // cache()->rememberForever('stats',function(){
-            //     return ['lessons' => 1300, 'hours' => 50000, 'series' =>100];
-            // });
+        // dump($projects);
+        // cache()->rememberForever('stats',function(){
+        //     return ['lessons' => 1300, 'hours' => 50000, 'series' =>100];
+        // });
 
-        return view('projects.index',compact('projects'));
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -87,9 +86,9 @@ class ProjectsController extends Controller
 
 
         //$project->save();
-         // Mail::to($projects->owner->email)->send(
-         //    new ProjectCreated($projects)
-         // );
+        // Mail::to($projects->owner->email)->send(
+        //    new ProjectCreated($projects)
+        // );
 
         return redirect('/projects');
     }
@@ -110,10 +109,10 @@ class ProjectsController extends Controller
         //EOE E21
         //abort_if($project->owner_id !== auth()->id(),403);
 
-        $this->authorize('update',$project);
+        $this->authorize('update', $project);
         
 
-        return view('projects.show',compact('project'));
+        return view('projects.show', compact('project'));
     }
 
     /**
@@ -128,7 +127,7 @@ class ProjectsController extends Controller
         // $project = project::findorFail($id);
 
 
-        return view('projects.edit',compact('project'));
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -173,24 +172,19 @@ class ProjectsController extends Controller
      */
     public function destroy(Project $project)
     {
+        $this->authorize('update', $project);
 
-        $this->authorize('update',$project);
+        $project->delete();
 
-       $project->delete();
+        return redirect('/projects');
+    }
 
-      return redirect('/projects');
-  }
-
-  public function validateProject()
-{
-
-                return request()->validate([
+    public function validateProject()
+    {
+        return request()->validate([
             'title' => ['required', 'min:3'],
             'description' => ['required', 'min:3']
             
         ]);
-
-}
-
-
+    }
 }
